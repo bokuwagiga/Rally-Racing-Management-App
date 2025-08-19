@@ -173,8 +173,7 @@ def start_race(distance,fee) -> None:
     try:
         # 1. Create a race event row
         cursor.execute("INSERT INTO BOOTCAMP_RALLY.RALLY.RACE_EVENTS (DISTANCE) VALUES (%s)", (distance,))
-        conn.commit()
-        cursor.execute("SELECT MAX(RACE_ID) FROM BOOTCAMP_RALLY.RALLY.RACE_EVENTS")
+        cursor.execute("SELECT RACE_ID FROM BOOTCAMP_RALLY.RALLY.RACE_EVENTS ORDER BY STARTED_AT DESC LIMIT 1")
         race_id = cursor.fetchone()[0]
 
         # 2. Select cars with enough team budget
